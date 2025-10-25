@@ -1,0 +1,48 @@
+name: Build UEFI OS
+
+on:
+  #schedule:
+  #  - cron: '0 0 1 * *'  # Run at 00:00 UTC on the 1st of every month
+  push:
+    branches:
+      - master  # Run on push to master
+  #pull_request:
+    #branches:
+      #- master  # Optional: Run on PRs to master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive  # Initialize and fetch submodules
+
+      # Install required packages
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            gnu-efi \
+            mtools \
+            parted
+
+      # Build the UEFI OS
+      - name: Build with make
+        run: make all
+
+      # Verify the image was created
+      - name: List generated files
+        run: ls build/
+
+      # Upload the UEFI image as an artifact
+      - name: Upload uefi.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: uefi-img
+          path: build/uefi.img

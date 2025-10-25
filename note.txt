@@ -1,0 +1,18 @@
+UEFI
+https://github.com/tianocore/edk2
+https://wiki.osdev.org/UEFI
+https://uefi.org/specs/UEFI/2.10/index.html
+https://github.com/LensPlaysGames/RADII
+
+UEFI application named "BOOTIA32.efi" (for 32-bit applications) or "BOOTX64.efi" (for 64-bit applications) stored in the "/EFI/BOOT"
+
+gnu-efi vs edk2-shell
+^to build using gnu (gcc,ld,objcopy), must use uefi_call_wrapper() in code
+
+May want cross-compiler
+
+make clean
+make all
+make qemu
+
+bash make.sh
