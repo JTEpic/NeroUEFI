@@ -25,7 +25,7 @@ The master branch is the stable integration branch and should always compile and
 
 ## Compiling NeroUEFI
 
-NeroUEFI is written primarily in C. NeroUEFI itself requires only the GCC compiler.
+NeroUEFI is written primarily in C and Rust. NeroUEFI itself requires only the GCC and Rust compiler.
 
 NeroUEFI supports compilation on Windows with Visual C++ 2013 and later, MinGW and MinGW-w64, on macOS with Clang and on Linux and other Unix-like systems with GCC and Clang. It will likely compile in other environments as well, but this is not regularly tested.
 
@@ -55,7 +55,8 @@ NeroUEFI itself needs the folowing headers and libraries for your OS and window 
 
     gcc and gnu-efi for compiling
     qemu-desktop and edk2-ovmf for emulation
-    mtools for building bootable file
+    parted and mtools for building bootable file
+    rustup for access to rust tools/compiling
 
 
 ## Reporting bugs

@@ -4,6 +4,9 @@ https://wiki.osdev.org/UEFI
 https://uefi.org/specs/UEFI/2.10/index.html
 https://github.com/LensPlaysGames/RADII
 
+Rust
+https://rust-osdev.github.io/uefi-rs/introduction.html
+
 UEFI application named "BOOTIA32.efi" (for 32-bit applications) or "BOOTX64.efi" (for 64-bit applications) stored in the "/EFI/BOOT"
 
 gnu-efi vs edk2-shell
