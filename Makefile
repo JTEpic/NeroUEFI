@@ -46,7 +46,8 @@ all:
 		-j .rel                 	\
 		-j .rela                	\
 		-j .reloc               	\
-		--target=efi-app-x86_64 	\
+		--output-target=efi-app-x86_64 	\
+		--subsystem=10				\
 		$(BUILD)/$(MAIN_FILE).so   	\
 		$(BUILD)/$(MAIN_FILE).efi
 	#objcopy -j .text -j .sdata -j .data -j .rodata -j .dynamic -j .dynsym  -j .rel -j .rela -j .rel.* -j .rela.* -j .reloc --target efi-app-x86_64 --subsystem=10 main.so main.efi
