@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - master  # Run on push to master
+  workflow_dispatch:
   #pull_request:
     #branches:
       #- master  # Optional: Run on PRs to master
