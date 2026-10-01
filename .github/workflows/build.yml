@@ -34,7 +34,7 @@ jobs:
 
       # Build the UEFI OS
       - name: Build with make
-        run: make all
+        run: make build
 
       # Verify the image was created
       - name: List generated files
