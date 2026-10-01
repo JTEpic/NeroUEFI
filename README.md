@@ -56,7 +56,7 @@ NeroUEFI itself needs the folowing headers and libraries for your OS and window 
     gcc and gnu-efi for compiling
     qemu-desktop and edk2-ovmf for emulation
     parted and mtools for building bootable file
-    rustup for access to rust tools/compiling
+    rustup for access to rust tools/compiling, x86_64-unknown-uefi target
 
 
 ## Reporting bugs

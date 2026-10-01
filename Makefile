@@ -1,4 +1,4 @@
-SRC := src
+BOOT := boot
 BUILD := build
 USER_LIB := /usr/lib
 GNU_EFI_INC := /usr/include/efi
@@ -6,13 +6,17 @@ GNU_EFI_INC := /usr/include/efi
 GNU_EFI_LIB := /usr/lib
 EDK2_OVMF := /usr/share/edk2-ovmf
 
-MAIN_FILE := main
+MAIN_FILE := boot
 QEMU_TARGET := uefi.img
 
-all:
+.PHONY: all build clean qemu
+
+all: build qemu
+
+build:
 	mkdir -p $(BUILD)
 
-	gcc $(SRC)/$(MAIN_FILE).c           \
+	gcc $(BOOT)/$(MAIN_FILE).c           \
 		-c                              \
 		-fno-stack-protector            \
 		-fpic                           \
@@ -65,12 +69,20 @@ all:
 	mformat -i $(BUILD)/part.img -h 32 -t 32 -n 64 -c 1
 
 	# Copy UEFI Applications to File System
-	mcopy -i $(BUILD)/part.img $(BUILD)/main.efi ::
+	#mcopy -i $(BUILD)/part.img $(BUILD)/main.efi ::
+
+	# Create the standard UEFI fallback boot path, auto run on boot
+	mmd -i $(BUILD)/part.img ::EFI
+	mmd -i $(BUILD)/part.img ::EFI/BOOT
+
+	mcopy -i $(BUILD)/part.img \
+		$(BUILD)/$(MAIN_FILE).efi \
+		::EFI/BOOT/BOOTX64.EFI
 
 	# Write Partition Img to Main Img
 	dd if=$(BUILD)/part.img of=$(BUILD)/uefi.img bs=512 count=91669 seek=2048 conv=notrunc
 
-qemu:
+qemu: build
 	#qemu-system-x86_64 -cpu qemu64 \
   		#-drive if=pflash,format=raw,unit=0,file=path_to_OVMF_CODE.fd,readonly=on \
   		#-drive if=pflash,format=raw,unit=1,file=path_to_OVMF_VARS.fd \
