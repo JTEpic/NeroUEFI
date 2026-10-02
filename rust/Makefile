@@ -17,3 +17,8 @@ qemu-rust: build-rust
     -drive if=pflash,format=raw,readonly=on,file=$(OVMF_CODE) \
     -drive if=pflash,format=raw,readonly=on,file=$(OVMF_VARS) \
     -drive format=raw,file=fat:rw:$(BUILD)/esp
+
+clean:
+	cargo clean
+	# -rf
+	rm -r $(BUILD)/* || echo "Clean Rust"

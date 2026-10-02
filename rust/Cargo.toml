@@ -3,6 +3,10 @@ name = "NeroUEFI"
 version = "0.1.1"
 edition = "2024"
 
+[[bin]]
+name = "NeroUEFI"
+path = "boot/boot.rs"
+
 [dependencies]
 log = "0.4.34"
 uefi = { version = "0.41.0", features = ["logger", "panic_handler"] }

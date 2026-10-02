@@ -9,7 +9,7 @@ EDK2_OVMF := /usr/share/edk2-ovmf
 MAIN_FILE := boot
 QEMU_TARGET := uefi.img
 
-.PHONY: all build clean qemu
+.PHONY: all build clean qemu rust rust-build rust-qemu
 
 all: build qemu
 
@@ -94,4 +94,15 @@ qemu: build
 
 clean:
 	# -f
-	rm $(BUILD)/* || echo "Clean"
+	rm -r $(BUILD)/* || echo "Clean"
+	$(MAKE) -C rust clean
+
+# Rust
+rust:
+	$(MAKE) -C rust all-rust
+
+rust-build:
+	$(MAKE) -C rust build-rust
+
+rust-qemu:
+	$(MAKE) -C rust qemu-rust
